@@ -1,0 +1,5 @@
+suites:
+  http_adapter_suite:
+    namespace: Indigo\HttpAdapter
+    psr4_prefix: Indigo\HttpAdapter
+formatter.name: pretty

@@ -1,0 +1,10 @@
+suites:
+  http_adapter_suite:
+    namespace: Indigo\HttpAdapter
+    psr4_prefix: Indigo\HttpAdapter
+extensions:
+  - PhpSpec\Extension\CodeCoverageExtension
+formatter.name: pretty
+code_coverage:
+  format: clover
+  output: build/coverage.xml
