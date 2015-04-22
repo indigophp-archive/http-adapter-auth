@@ -39,22 +39,22 @@ class AuthenticatingHttpAdapter extends PsrHttpAdapterDecorator
     /**
      * {@inheritdoc}
      */
-    protected function sendInternalRequest(InternalRequestInterface $internalRequest)
+    protected function doSendInternalRequest(InternalRequestInterface $internalRequest)
     {
         $internalRequest = $this->authentication->authenticate($internalRequest);
 
-        return parent::sendInternalRequest($internalRequest);
+        return parent::doSendInternalRequest($internalRequest);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function sendInternalRequests(array $internalRequests, $success, $error)
+    protected function doSendInternalRequests(array $internalRequests)
     {
         foreach ($internalRequests as &$internalRequest) {
             $internalRequest = $this->authentication->authenticate($internalRequest);
         }
 
-        return parent::sendInternalRequests($internalRequests, $success, $error);
+        return parent::doSendInternalRequests($internalRequests);
     }
 }
