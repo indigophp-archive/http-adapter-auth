@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Indigo HttpAdapter package.
+ * This file is part of the Indigo HttpAdapter Auth package.
  *
  * (c) Indigo Development Team
  *
