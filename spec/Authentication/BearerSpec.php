@@ -2,7 +2,6 @@
 
 namespace spec\Indigo\HttpAdapter\Authentication;
 
-use Psr\Http\Message\RequestInterface;
 use PhpSpec\ObjectBehavior;
 
 class BearerSpec extends ObjectBehavior
@@ -29,12 +28,11 @@ class BearerSpec extends ObjectBehavior
         $this->getToken()->shouldReturn('another_token');
     }
 
-    function it_does_not_accept_non_string_token()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetToken(null);
-    }
-
-    function it_authenticates_a_request(RequestInterface $request, RequestInterface $newRequest)
+    /**
+     * @param Psr\Http\Message\RequestInterface $request
+     * @param Psr\Http\Message\RequestInterface $newRequest
+     */
+    function it_authenticates_a_request($request, $newRequest)
     {
         $request->withHeader('Authorization', 'Bearer token')->willReturn($newRequest);
 

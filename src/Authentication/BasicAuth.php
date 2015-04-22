@@ -35,13 +35,8 @@ class BasicAuth implements Authentication
      * @param string $username
      * @param string $password
      */
-    public function __construct($username, $password)
+    public function __construct(string $username, string $password)
     {
-        Assert\lazy()
-            ->that($username, 'username')->string()
-            ->that($password, 'password')->string()
-            ->verifyNow();
-
         $this->username = $username;
         $this->password = $password;
     }
@@ -61,10 +56,8 @@ class BasicAuth implements Authentication
      *
      * @param string $username
      */
-    public function setUsername($username)
+    public function setUsername(string $username)
     {
-        Assertion::string($username);
-
         $this->username = $username;
     }
 
@@ -83,10 +76,8 @@ class BasicAuth implements Authentication
      *
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
-        Assertion::string($password);
-
         $this->password = $password;
     }
 

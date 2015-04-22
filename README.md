@@ -46,11 +46,6 @@ $ phpspec run
 ```
 
 
-## Looking forward to PHP 7
-
-PHP 7 will introduce scalar type hints, thus for the long run it makes no sense to write checks for scalar types. Until PHP 7 is not released (and became the most commonly used version) [beberlei/assert](https://github.com/beberlei/assert/) is used for type checking. Any further checks should be done in the code.
-
-
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.

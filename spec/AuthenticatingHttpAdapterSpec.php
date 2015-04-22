@@ -2,15 +2,15 @@
 
 namespace spec\Indigo\HttpAdapter;
 
-use Indigo\HttpAdapter\Authentication;
-use Ivory\HttpAdapter\PsrHttpAdapterInterface;
-use Ivory\HttpAdapter\Message\InternalRequestInterface;
-use Ivory\HttpAdapter\Message\ResponseInterface;
 use PhpSpec\ObjectBehavior;
 
 class AuthenticatingHttpAdapterSpec extends ObjectBehavior
 {
-    function let(PsrHttpAdapterInterface $httpAdapter, Authentication $authentication)
+    /**
+     * @param Ivory\HttpAdapter\PsrHttpAdapterInterface $httpAdapter
+     * @param Indigo\HttpAdapter\Authentication $authentication
+     */
+    function let($httpAdapter, $authentication)
     {
         $this->beConstructedWith($httpAdapter, $authentication);
     }
@@ -20,12 +20,19 @@ class AuthenticatingHttpAdapterSpec extends ObjectBehavior
         $this->shouldHaveType('Indigo\HttpAdapter\AuthenticatingHttpAdapter');
     }
 
+    /**
+     * @param Ivory\HttpAdapter\Message\InternalRequestInterface $request
+     * @param Ivory\HttpAdapter\Message\InternalRequestInterface $authenticatedRequest
+     * @param Ivory\HttpAdapter\Message\ResponseInterface        $response
+     * @param Ivory\HttpAdapter\PsrHttpAdapterInterface          $httpAdapter
+     * @param Indigo\HttpAdapter\Authentication                  $authentication
+     */
     function it_sends_an_internal_request(
-        InternalRequestInterface $request,
-        InternalRequestInterface $authenticatedRequest,
-        ResponseInterface $response,
-        PsrHttpAdapterInterface $httpAdapter,
-        Authentication $authentication
+        $request,
+        $authenticatedRequest,
+        $response,
+        $httpAdapter,
+        $authentication
     ) {
         $authentication->authenticate($request)->willReturn($authenticatedRequest);
         $httpAdapter->sendRequest($authenticatedRequest)->willReturn($response);
@@ -33,15 +40,25 @@ class AuthenticatingHttpAdapterSpec extends ObjectBehavior
         $this->sendRequest($request)->shouldReturn($response);
     }
 
+    /**
+     * @param Ivory\HttpAdapter\Message\InternalRequestInterface $request1
+     * @param Ivory\HttpAdapter\Message\InternalRequestInterface $request2
+     * @param Ivory\HttpAdapter\Message\InternalRequestInterface $authenticatedRequest1
+     * @param Ivory\HttpAdapter\Message\InternalRequestInterface $authenticatedRequest2
+     * @param Ivory\HttpAdapter\Message\ResponseInterface        $response1
+     * @param Ivory\HttpAdapter\Message\ResponseInterface        $response2
+     * @param Ivory\HttpAdapter\PsrHttpAdapterInterface          $httpAdapter
+     * @param Indigo\HttpAdapter\Authentication                  $authentication
+     */
     function it_sends_internal_requests(
-        InternalRequestInterface $request1,
-        InternalRequestInterface $request2,
-        InternalRequestInterface $authenticatedRequest1,
-        InternalRequestInterface $authenticatedRequest2,
-        ResponseInterface $response1,
-        ResponseInterface $response2,
-        PsrHttpAdapterInterface $httpAdapter,
-        Authentication $authentication
+        $request1,
+        $request2,
+        $authenticatedRequest1,
+        $authenticatedRequest2,
+        $response1,
+        $response2,
+        $httpAdapter,
+        $authentication
     ) {
         $authentication->authenticate($request1)->willReturn($authenticatedRequest1);
         $authentication->authenticate($request2)->willReturn($authenticatedRequest2);

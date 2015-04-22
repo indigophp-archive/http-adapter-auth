@@ -106,10 +106,8 @@ class Matching implements Authentication
      *
      * @return self
      */
-    public function createUrlMatcher(Authentication $authentication, $url)
+    public function createUrlMatcher(Authentication $authentication, string $url)
     {
-        Assertion::string($url);
-
         $matcher = function($request) use ($url) {
             return preg_match($url, (string) $request->getUri());
         };

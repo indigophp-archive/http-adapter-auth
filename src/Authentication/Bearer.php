@@ -28,10 +28,8 @@ class Bearer implements Authentication
     /**
      * @param string $token
      */
-    public function __construct($token)
+    public function __construct(string $token)
     {
-        Assertion::string($token);
-
         $this->token = $token;
     }
 
@@ -50,10 +48,8 @@ class Bearer implements Authentication
      *
      * @param string $token
      */
-    public function setToken($token)
+    public function setToken(string $token)
     {
-        Assertion::string($token);
-
         $this->token = $token;
     }
 

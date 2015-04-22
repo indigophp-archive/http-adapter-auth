@@ -2,15 +2,16 @@
 
 namespace spec\Indigo\HttpAdapter\Authentication;
 
-use Indigo\HttpAdapter\Authentication;
-use Psr\Http\Message\RequestInterface;
 use PhpSpec\ObjectBehavior;
 
 class MatchingSpec extends ObjectBehavior
 {
     private $matcher;
 
-    function let(Authentication $authentication)
+    /**
+     * @param Indigo\HttpAdapter\Authentication $authentication
+     */
+    function let($authentication)
     {
         $this->matcher = function($request) { return true; };
 
@@ -22,12 +23,18 @@ class MatchingSpec extends ObjectBehavior
         $this->shouldHaveType('Indigo\HttpAdapter\Authentication\Matching');
     }
 
-    function it_has_an_authentication(Authentication $authentication)
+    /**
+     * @param Indigo\HttpAdapter\Authentication $authentication
+     */
+    function it_has_an_authentication($authentication)
     {
         $this->getAuthentication()->shouldReturn($authentication);
     }
 
-    function it_accepts_an_authentication(Authentication $anotherAuthentication)
+    /**
+     * @param Indigo\HttpAdapter\Authentication $anotherAuthentication
+     */
+    function it_accepts_an_authentication($anotherAuthentication)
     {
         $this->setAuthentication($anotherAuthentication);
 
@@ -48,14 +55,23 @@ class MatchingSpec extends ObjectBehavior
         $this->getMatcher()->shouldReturn($matcher);
     }
 
-    function it_authenticates_a_request(Authentication $authentication, RequestInterface $request, RequestInterface $newRequest)
+    /**
+     * @param Indigo\HttpAdapter\Authentication $authentication
+     * @param Psr\Http\Message\RequestInterface $request
+     * @param Psr\Http\Message\RequestInterface $newRequest
+     */
+    function it_authenticates_a_request($authentication, $request, $newRequest)
     {
         $authentication->authenticate($request)->willReturn($newRequest);
 
         $this->authenticate($request)->shouldReturn($newRequest);
     }
 
-    function it_does_not_authenticate_a_request(Authentication $authentication, RequestInterface $request)
+    /**
+     * @param Indigo\HttpAdapter\Authentication   $authentication
+     * @param Psr\Http\Message\RequestInterface $request
+     */
+    function it_does_not_authenticate_a_request($authentication, $request)
     {
         $matcher = function($request) { return false; };
 
@@ -66,7 +82,10 @@ class MatchingSpec extends ObjectBehavior
         $this->authenticate($request)->shouldReturn($request);
     }
 
-    function it_creates_a_matcher_from_url(Authentication $authentication)
+    /**
+     * @param Indigo\HttpAdapter\Authentication $authentication
+     */
+    function it_creates_a_matcher_from_url($authentication)
     {
         $this->createUrlMatcher($authentication, 'url')->shouldHaveType('Indigo\HttpAdapter\Authentication\Matching');
     }

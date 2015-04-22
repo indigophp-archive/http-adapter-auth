@@ -2,7 +2,6 @@
 
 namespace spec\Indigo\HttpAdapter\Authentication;
 
-use Psr\Http\Message\RequestInterface;
 use PhpSpec\ObjectBehavior;
 
 class BasicAuthSpec extends ObjectBehavior
@@ -29,11 +28,6 @@ class BasicAuthSpec extends ObjectBehavior
         $this->getUsername()->shouldReturn('jane.doe');
     }
 
-    function it_does_not_accept_non_string_username()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetUsername(null);
-    }
-
     function it_has_a_password()
     {
         $this->getPassword()->shouldReturn('secret');
@@ -46,12 +40,11 @@ class BasicAuthSpec extends ObjectBehavior
         $this->getPassword()->shouldReturn('very_secret');
     }
 
-    function it_does_not_accept_non_string_password()
-    {
-        $this->shouldThrow('InvalidArgumentException')->duringSetPassword(null);
-    }
-
-    function it_authenticates_a_request(RequestInterface $request, RequestInterface $newRequest)
+    /**
+     * @param Psr\Http\Message\RequestInterface $request
+     * @param Psr\Http\Message\RequestInterface $newRequest
+     */
+    function it_authenticates_a_request($request, $newRequest)
     {
         $request->withHeader('Authorization', 'Basic '.base64_encode('john.doe:secret'))->willReturn($newRequest);
 
