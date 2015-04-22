@@ -11,6 +11,7 @@
 
 namespace Indigo\HttpAdapter\Authentication;
 
+use Assert;
 use Assert\Assertion;
 use Indigo\HttpAdapter\Authentication;
 use Psr\Http\Message\RequestInterface;
@@ -36,8 +37,13 @@ class BasicAuth implements Authentication
      */
     public function __construct($username, $password)
     {
-        $this->setUsername($username);
-        $this->setPassword($password);
+        Assert\lazy()
+            ->that($username, 'username')->string()
+            ->that($password, 'password')->string()
+            ->verifyNow();
+
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /**
