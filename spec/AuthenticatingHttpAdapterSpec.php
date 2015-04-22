@@ -6,9 +6,7 @@ use Indigo\HttpAdapter\Authentication;
 use Ivory\HttpAdapter\PsrHttpAdapterInterface;
 use Ivory\HttpAdapter\Message\InternalRequestInterface;
 use Ivory\HttpAdapter\Message\ResponseInterface;
-// use Psr\Http\Message\ResponseInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class AuthenticatingHttpAdapterSpec extends ObjectBehavior
 {
