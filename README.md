@@ -1,3 +1,5 @@
+> DEPRECATED in favor of https://github.com/php-http/authentication
+
 # Ivory Http Adapter Authentication plugin
 
 [![Latest Version](https://img.shields.io/github/release/indigophp/http-adapter-auth.svg?style=flat-square)](https://github.com/indigophp/http-adapter-auth/releases)
